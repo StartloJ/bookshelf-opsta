@@ -45,6 +45,7 @@ $app->get('/books/', function (Request $request) use ($app) {
         ->setLevel(\Psr\Log\LogLevel::ALERT)
         ->setFullMessage("User just access book page")
         ->setAdditional("uri", $request->getPathInfo())
+        ->setAdditional("env", "bootcamp")
         ->setAdditional("method", $request->getMethod());
     $publisher->publish($message);
 
@@ -92,6 +93,7 @@ $app->post('/books/add', function (Request $request) use ($app) {
         ->setFullMessage("New book just added with title: " . $book['title'] . ", ID: " . $book['author'])
         ->setAdditional("title", $book['title'])
         ->setAdditional("author", $book['author'])
+        ->setAdditional("env", "bootcamp")
         ->setAdditional("uri", $request->getPathInfo())
         ->setAdditional("method", $request->getMethod());
 
@@ -184,6 +186,7 @@ $app->post('/books/{id}/edit', function (Request $request, $id) use ($app) {
             ->setFullMessage("Book just edited with title: " . $book['title'] . ", ID: " . $book['author'])
             ->setAdditional("title", $book['title'])
             ->setAdditional("author", $book['author'])
+            ->setAdditional("env", "bootcamp")
             ->setAdditional("uri", $request->getPathInfo())
             ->setAdditional("method", $request->getMethod());
         $publisher->publish($message);
@@ -219,6 +222,7 @@ $app->post('/books/{id}/delete', function ($id) use ($app) {
             ->setLevel(\Psr\Log\LogLevel::ALERT)
             ->setFullMessage("Book just deleted with title: " . $book['title'] . ", ID: " . $book['author'])
             ->setAdditional("title", $book['title'])
+            ->setAdditional("env", "bootcamp")
             ->setAdditional("author", $book['author']);
         $publisher->publish($message);
 

@@ -19,6 +19,7 @@ RUN curl -sS https://raw.githubusercontent.com/composer/getcomposer.org/master/w
 
 # Copy composer.* and install required libraries
 COPY composer.* /var/www/html/
+RUN composer global require hirak/prestissimo
 RUN composer install --no-dev
 
 # Copy PHP source code

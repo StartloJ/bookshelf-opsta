@@ -1,11 +1,13 @@
 version: '3'
 services:
   web:
-    build: .
+    image: book:test
     ports:
       - "8080:80"
-    volumes:
-      - .:/var/www/html
+    # volumes:
+    #   - .:/var/www/html
+    depends_on:
+      - db
     environment:
       BOOKSHELF_DEBUG: "true"
       BOOKSHELF_BACKEND: mysql
@@ -14,8 +16,8 @@ services:
       CLOUDSQL_USER: bsuser
       CLOUDSQL_PASSWORD: bspass
       CLOUDSQL_PORT: 3306
-      GELF_HOST: 10.88.102.218
-      GELF_PORT: 12201
+      GELF_HOST: 10.4.8.93
+      GELF_PORT: 12203
   db:
     image: mariadb:10.4.7-bionic
     environment:
